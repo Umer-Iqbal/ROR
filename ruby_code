@@ -1,0 +1,86 @@
+hash or dectionary in ruby:
+  exemple1:  
+    months = Hash.new
+    months[1] = "11"
+    months[2] = "12"
+    months[3] = "13"
+    months[4] = "14"
+    months[5] = "15"
+    months[6] = "16"
+
+    puts months
+    puts months.keys
+    puts months.values
+  
+  Output:
+    {1=>"11", 2=>"12", 3=>"13", 4=>"14", 5=>"15", 6=>"16"}
+    1
+    2
+    3
+    4
+    5
+    6
+    11
+    12
+    13
+    14
+    15
+    16
+    
+  example2:
+    months = Hash.new
+    months[1] = "11"
+    months[2] = "12"
+    months[3] = "13"
+    months[4] = "14"
+    months[5] = "15"
+    months[6] = "16"
+
+    months.each do |m|
+        puts m[0], m[1]    #first represent key and second represent value
+    end
+    
+  output:
+    1
+    11
+    2
+    12
+    3
+    13
+    4
+    14
+    5
+    15
+    6
+    16
+
+hash or dectionary(end)::::::::::::::::
+
+array or list in ruby:
+
+  example1:
+    days = []   
+    days.push("Today")  
+    days.push("tomorrow") 
+    days.push("1")  
+    days.push("2") 
+    days.push("3")  
+    days.push("4") 
+    puts ("---------")
+    puts days
+    h = Hash[foo: 0, bar: 1, baz: 2]
+    puts h.values
+    
+  output:
+      ---------
+      Today
+      tomorrow
+      1
+      2
+      3
+      4
+      0
+      1
+      2 
+      
+array or list(end)::::::::::::::::
