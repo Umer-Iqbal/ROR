@@ -1,0 +1,11 @@
+its alternative of Active storage 
+paperclip: https://github.com/thoughtbot/paperclip
+
+(paperclip) :
+  how to check exists or not:    
+    product.documents.exists?
+  how to access (terminal):
+    product.documents.first.attachment
+    product.documents.first.id
+  how to display in views:
+    <%= image_tag document.attachment.url %>
