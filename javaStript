@@ -1,0 +1,23 @@
+How to add class to element:
+
+    import {Controller} from "@hotwired/stimulus"
+
+    export default class extends Controller {
+      static targets = ["order_status"]
+
+      // connect() {
+      //   for (let i = 0; i < this.order_statusTarget.childElementCount; i++) {
+      //     this.order_statusTarget.children[i].querySelector("span").classList.remove("status-shipped")
+      //     this.order_statusTarget.children[i].querySelector("span").classList.remove("status-ready")
+      //     this.order_statusTarget.children[i].querySelector("span").classList.remove("status-pending")
+      //
+      //     if (this.order_statusTarget.querySelector("span").innerHTML == 'shipped') {
+      //       this.order_statusTarget.children[i].querySelector("span").classList.add("status-shipped")
+      //     } else if (this.order_statusTarget.querySelector("span").innerHTML == 'ready') {
+      //       this.order_statusTarget.children[i].querySelector("span").classList.add("status-ready")
+      //     } else {
+      //       this.order_statusTarget.children[i].querySelector("span").classList.add("status-pending")
+      //     }
+      //   }
+      // }
+    }
