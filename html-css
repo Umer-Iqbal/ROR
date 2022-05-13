@@ -1,0 +1,33 @@
+how to apply class to element:
+
+.status-pending::before {
+    content: "\2022";
+    color: #ed4c4c;
+    font-size: 27px;
+    font-weight: bold;
+    display: inline-block;
+    width: 1rem;
+    vertical-align: bottom;
+}
+
+.status-shipped::before {
+    content: "\2022";
+    color: #1bc167;
+    font-size: 27px;
+    font-weight: bold;
+    display: inline-block;
+    width: 1rem;
+    vertical-align: bottom;
+}
+
+.status-ready::before {
+    content: "\2022";
+    color: #f4db50;
+    font-size: 27px;
+    font-weight: bold;
+    display: inline-block;
+    width: 1rem;
+    vertical-align: bottom;
+}
+
+<span class="status-text status-<%= order[:status] %>"><%= order[:status].titleize %></span>
