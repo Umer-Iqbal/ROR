@@ -1,0 +1,28 @@
+query parameter:
+
+  the page where we are going to pass:
+    <%= link_to "lll", new_article_path(:name=> "umer") %>
+  in controller we can access name like 
+      def new
+        debugger
+      end
+      
+      here if we check params then 
+        params[:name] will print umer
+        
+        
+session:
+
+  the page where we are going to pass:
+    <%= link_to "lll", new_article_path(:name=> "umer") %>
+  in controller we can access name like 
+      def new
+        session[:session_value] = params[:name]
+        debugger
+      end
+      
+      now we can access it any in the application
+        article > new
+          <h1>
+            <%= session[:session_value] %>
+          </h1>
