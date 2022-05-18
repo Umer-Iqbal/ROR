@@ -21,8 +21,68 @@ session:
         debugger
       end
       
-      now we can access it any in the application
+      now we can access it any in the whole application
         article > new
           <h1>
             <%= session[:session_value] %>
           </h1>
+          
+          
+          
+send id or parameteres using URL:
+
+  in view url bar:
+    http://localhost:3000/articles/active/ll
+    
+    in this case active will store in :var_status variable in the routes like in the given blow line
+
+  in routes:
+    get "/articles/:var_status/ll", to: "articles#index", foo: "jj"
+    
+    in this case :var_status will hold (active) that is passed using the "url" at above line-35 and "foo" is also a variable
+    and in this case it always hold (jj) when a reques will come on this link 
+    
+  in controller:
+    we can access the params send in url like
+    
+    def index
+      @status = params["var_status"]  it will give the value (active) that is comming from url
+      params["foo"]         it will give the value (jj) that is from the routes [we can use it here or make it instance varable to use
+                            it in view like above line]      
+    end
+    
+ in view:
+  we can access the status comming form url using the instance variable like
+  
+    @status   it will give the value (active) that is comming form url line-35
+  
+  we can also send this value to partial as given blow
+    
+    <%= render partial: "product", locals: { status_value: @status } %>       now @status will store in the status_value and we can access
+                                                                              it in partial using the status_value like blow    link< https://guides.rubyonrails.org/action_view_overview.html#partial-layouts > 
+                                                                              
+  in partial:
+    in partial _product.html.erb
+      
+      status_value          will hold (active) that is set in the above line-61 and we can use it here according to our need
+      
+      
+      
+      
+send id or params using link_to or without using url:
+
+  in view:
+    <%= link_to "index_article", articles_path(:name=> "umer") %>                     this will go to articles controller and method index
+    <%= link_to "index_article_using named params", articles_path(name: "umer") %>    this line also behave like above but here we are sending  
+                                                                                      params using name parameters
+    
+  in controller:
+    def index:
+      @name_value = params["name"]              it will give the value (umer) that is passed form the view above remaining process will be
+                                                be same as in [send id or parameteres using URL]
+  
+  
+
+
+
+
