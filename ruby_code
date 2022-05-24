@@ -89,6 +89,20 @@ hash or dectionary in ruby:
       16
       injj
       
+  how to insert element in hash
+    exemple1:
+      months = Hash.new
+      
+      months.store("d", 42)
+      months.store("e", 43)
+      
+      puts(months)
+      puts(months['e'])
+      
+    output:
+      {"d"=>42, "e"=>43}
+      43
+      
       
 hash or dectionary(end)::::::::::::::::
 
