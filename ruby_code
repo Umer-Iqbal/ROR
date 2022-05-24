@@ -119,4 +119,24 @@ array or list in ruby:
       1
       2 
       
+ how to insert element in array
+    exemple1:
+        arr =  []
+
+        $i = 1
+        $e = 5
+
+        while $i < $e do
+            arr.push($i)
+            $i +=1
+        end
+
+        $i = 1
+        while $i < $e do
+            puts(arr[$i])
+            $i +=1
+        end
+
+        puts(arr)
+      
 array or list(end)::::::::::::::::
