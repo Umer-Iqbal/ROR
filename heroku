@@ -1,0 +1,8 @@
+https://devcenter.heroku.com/articles/heroku-cli
+
+heroku git:remote  -a shipping-easy-web
+git remote -v
+git push heroku issues:main
+
+heroku run rails c
+heroku logs -t
