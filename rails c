@@ -1,0 +1,17 @@
+How to create user::
+
+u = User.create(first_name: "Jason", last_name: "Macek", store_key: "[FILTERED]", store_type: "CSV Orders", store_url: "-", role: 1, email: "jason@dollarfulfillment
+.com", password: "123456")
+
+How to check errors::
+
+u.errors
+
+How to show all user::
+
+User.all
+
+How to display find a specific user::
+
+User.find(Userid)
+
