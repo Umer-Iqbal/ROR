@@ -6,3 +6,7 @@ git push heroku issues:main
 
 heroku run rails c
 heroku logs -t
+
+
+how to deploy rails app on heroku:
+https://enlear.academy/how-to-deploy-a-rails-7-app-with-postgres-to-heroku-6a49db8328fd
