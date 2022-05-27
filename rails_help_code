@@ -1,1 +1,17 @@
 html: { "data-date_filter-target": "dateForm" }    to inject html element in ruby tag
+
+
+how to send params in url using get method:
+    async updateQuantity(url, updated_quantity) {
+    
+    url = `${url}?date=${22}`     :: params["date"] will be receive in the rb.controller at the given url
+    
+    const request = new FetchRequest('patch', url, {
+      body: JSON.stringify({quantity: updated_quantity}),
+      contentType: "application/json",
+    })
+    const response = await request.perform()
+    if (response.ok) {
+      this.flashMessage()
+    }
+  }
