@@ -1,0 +1,1 @@
+$('#superAdminModal').modal()         :: modal in jquery and first section show <document.getElementById('')
