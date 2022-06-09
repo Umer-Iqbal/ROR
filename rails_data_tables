@@ -1,0 +1,148 @@
+------------------------------------------------------------------------------------------------- 1-section
+index.html.erb :-
+
+<table class="table table-flush" data-organization-datatable-target="table" data-organization-datatable-source="<%= super_admin_root_path(format: :json)"%>">
+    <thead class="thead-light">
+    <tr>
+      <th data-orderable="false">Company Name</th>
+      <th data-orderable="false">Email</th>
+      <th data-orderable="false">Phone Number</th>
+      <th data-orderable="false">Status</th>
+      <th data-orderable="false"></th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  
+  ------------------------------------------------------------------------------------------------- 2-section
+  
+organization_datatable_controller.js :-
+
+import DatatableController from 'datatable_controller'
+
+export default class extends DatatableController {
+  static get targets () {
+    return ['filter', 'search']
+  }
+  
+  connect () {
+    super.connect()
+    $(this.filterTargets).on('select2:select select2:unselect', this.filterSelected.bind(this))  //it will call the 3-section connect
+  }
+  
+  //blow funcation will map the value in columns of datatables that will automatically past in the body of table <tbody></tbody> in 1-section
+  get columns () {
+    return [
+      { data: 'name' },
+      { data: 'email' },
+      { data: 'phone_no' },
+      { data: 'status' },
+      { data: 'dt_action' },
+      { data: 'id', visible: false }
+    ]
+  }
+  
+------------------------------------------------------------------------------------------------- 3-section
+
+datatable_controller.js :-
+
+import { Controller } from 'stimulus'
+
+export default class extends Controller {
+  static get targets () {
+    return ['table']
+  }
+
+  connect () {
+  //blow statement will check if datatable is alread papulated or not (https://fellowtuts.com/jquery/function-check-jquery-datatable-exists/)
+  
+    if (!$.fn.dataTable.isDataTable(this.tableTarget)) { this.dataTable = $(this.tableTarget).DataTable(this.dataTableOptions) }  //it will call the blow methond dataTableOptions
+    $(this.tableTarget).on('init.dt', this.init.bind(this))
+  }
+  
+  get dataTableOptions () {
+    return {
+      serverSide: this.serverSide,
+      ajax: {
+        url: this.source,                  // it will call the index of 4-section because the url it holds will map it there
+        data: this.manipulateData.bind(this)
+      },
+      order: this.order,
+      searching: this.searching,
+      columns: this.columns,
+      language: { searchPlaceholder: this.searchPlaceholder }
+    }
+  }
+  
+  
+  get order () {
+    return false
+  }
+
+  get searching () {
+    return true
+  }
+
+  get columns () {
+    return [
+      { data: 'name' },
+      { data: 'dt_action' }
+    ]
+  }
+}
+
+------------------------------------------------------------------------------------------------- 4-section
+
+organizations_controller.rb :-
+
+def index
+  debugger
+  respond_to do |format|
+    format.html
+    format.json { render json: OrganizationDatatable.new(params, view_context: view_context) }   //this will call the view_columns in the 5-section (this is because the request came here as json from above section want to call the view_columns method) 
+  end
+  @selected = params[:status].present? ? params[:status] : 'active'
+end
+
+
+------------------------------------------------------------------------------------------------- 5-section
+
+OrganizationDatatable.rb :-
+
+class OrganizationDatatable < ApplicationDatatable
+
+ def view_columns
+    # Declare strings in this format: ModelName.column_name
+    # or in aliased_join_table.column_name format
+    @view_columns ||= {
+      id: { source: "Organization.id", searchable: false },
+      name: { source: "Organization.name" },
+      email: { source: "Organization.email" },
+      phone_no: { source: "Organization.phone_no" },
+      status: { source: "Organization.status", searchabble: false },
+      dt_action: { source: '', searchable: false }
+    }
+  end
+
+  def data
+    records.map do |record|
+      {
+        id: record.id,
+        name: name_column(record),
+        email: record.email,
+        phone_no: phone_number(record),
+        status: status_column(record),
+        DT_RowId: record.id,
+        dt_action: action_column(record)
+      }
+    end
+  end
+
+  def get_raw_records
+    organizations = Organization.all.order(id: :desc)
+    organizations = organizations.where(status: params[:status]) if params[:status].present? && params[:status] != 'all'
+    organizations
+  end
+  
+end
