@@ -29,7 +29,8 @@ session:
           </h1>
           
           
-          
+
+url parameter with complete cycle:
 send id or parameteres using URL:
 
   in view url bar:
