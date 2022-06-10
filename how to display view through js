@@ -1,0 +1,82 @@
+Example-1 (notch-web)
+--------------------------------------------------section-1
+<!-- request will got to section to from here -->
+view > catalogs > _selection.html.erb :-
+
+  data-controller="catalog-selection" data-action="click->catalog-selection#toggle" data-catalog-selection-tab-value="<%= params[:new_product_path].split('=').second %>"
+
+
+--------------------------------------------------section-2
+assets > javascripts > controllers > catalog_selection.js :-
+
+  static values = {tab: String}
+  
+  addToCatalog(event) {
+    event.stopPropagation()
+    event.preventDefault()
+
+    $.ajax({
+      url: this.url,               //this will call the create_multiple method in the section-3 because its rul is here
+      dataType: this.dataType,
+      data: {
+        product_ids: this.selection,
+        tab: this.tabValue
+      }
+    });
+    showLoader();
+    event.target.disabled = true
+  }
+  
+  
+--------------------------------------------------section-3
+controllers > products_controller.rb :-
+
+#if we dont write body even then request will go to create_multiple.js.erb file because request came here is also form js it need to send response to
+js too thats why we replace [html wiht js  like (create_multiple.html.erb as create_multiple.js.erb)] 
+
+  def create_multiple
+    @products = params[:product_ids].map do |id|
+      product = Product.find(id).make_copy
+      product.assign_attributes({ parent_id: id.to_i,
+                                  floor_plan_id: @floor_plan.id,
+                                  quantity: 1 })
+      product
+    end
+    @products.map(&:save)
+    session[:product_ids] = @products.map(&:id) if request.referrer.include? 'floor_plans'
+    project_floor_plan_path(@project, @floor_plan)
+    flash[:notice] = 'Products created successfully.'
+  end
+  
+  
+--------------------------------------------------section-4
+views > products > create_multiple.js.erb:-
+
+<% if params[:tab].present? %>
+//window.location will open the page whose url will be given to 
+window.location = "<% request.referer %>?product_id=<%= params[:product_ids].first.to_i %>&selected_floorplan=<%= params[:floor_plan_id].to_i %>&tab=<%= params[:tab] %>"
+<% else %>
+window.location = "<% request.referer %>"
+<% end %>
+
+############################################################# end ###################################
+Example-2 (levelup-web)
+--------------------------------------------------section-1
+app > controllers > super_admin > organizations_controller.rb
+
+module SuperAdmin
+  class OrganizationsController < ApplicationController
+      before_action :set_organization, except: [:index, :new, :create]
+      
+#if some one call the new and request come from js then it will forwart to new.js.erb in section-2
+
+
+--------------------------------------------------section-2
+//it will append the (super_admin/organizations/_form.htm.erb) partial to given id div 
+document.getElementById("newCompanyModal").innerHTML = "<%=j render 'super_admin/organizations/form', url:super_admin_organizations_path, organization: @organization %>"
+//blow line will open the blow id div in model and its jquery funcaiton
+//we can also write it as (document.getElementById("superAdminModal").modal()
+$('#superAdminModal').modal()
+init()
+
+############################################################# end ###################################
