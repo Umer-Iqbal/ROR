@@ -5,6 +5,7 @@ query parameter:
   in controller we can access name like 
       def new
         debugger
+        name = params[:name]
       end
       
       here if we check params then 
