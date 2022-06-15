@@ -1,0 +1,12 @@
+stash: 
+  https://www.gitkraken.com/learn/git/git-stash#:~:text=Git%20Stash%20List&text=The%20Git%20stash%20list%20command,stash%40%20and%20the%20desired%20index.
+
+  git stash list     :: how to display old stash
+  git stash          :: how to add something into stash
+  git stash pop      :: how to get data form stash
+  git stash drop <stash_id>   :: how to remove specific stash form list
+  git stash clear             :: how to remove all stash from list
+
+
+commands:
+git reset --hard <branch id>  :: how to move to old branch, previous branch git
