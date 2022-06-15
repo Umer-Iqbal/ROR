@@ -10,3 +10,4 @@ stash:
 
 commands:
 git reset --hard <branch id>  :: how to move to old branch, previous branch git
+git clean -f <file.extention>  :: how to remove file that is change and whose color is red
