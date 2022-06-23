@@ -85,6 +85,18 @@ send id or params using link_to or without using url:
   
   
 
+----------------------------------------------New-----------------------------------------
 
+how to add a string and use it at multiple places
+https://guides.rubyonrails.org/i18n.html
+
+config/locales/en.yml
+en:
+  ll: "jj"
+  
+then go in ruby file and write 
+<%= t('ll') %>      :: now at this place 'jj' will display
+
+---------------------------------------------end-------------------------------------
 
 
