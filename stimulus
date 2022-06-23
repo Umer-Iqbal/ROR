@@ -1,2 +1,71 @@
 https://stimulus.hotwired.dev/handbook/managing-state
 https://stimulus.hotwired.dev/reference/values
+
+''''''''''''''''''''''''''''''''''''''''''''''''''
+------------------------------------------------
+
+
+''''''''''''''''''''''''''''''''''''''''''''''''''
+how to create controller file:-
+controller-name_controller.js
+------------------------------------------------
+
+
+''''''''''''''''''''''''''''''''''''''''''''''''''
+how to create controller stimulus:-
+
+import {Controller} from "@hotwired/stimulus"
+export default class extends Controller {
+
+}
+------------------------------------------------
+
+''''''''''''''''''''''''''''''''''''''''''''''''''
+how to decelare controller in view
+data-controller="<controller-name>"
+------------------------------------------------
+
+''''''''''''''''''''''''''''''''''''''''''''''''''
+values:-
+data-<controller-name>-<valueName>-value="<%= export_orders_path %>"
+
+controller:-
+  static values = {
+    valueName: String
+  }
+  
+  let data = this.valueNameValue
+------------------------------------------------  
+
+''''''''''''''''''''''''''''''''''''''''''''''''''
+target:-
+data-<controller-name>-target="targetName"
+
+controller:-
+  static targets = ["targetName"]
+  
+------------------------------------------------
+
+
+''''''''''''''''''''''''''''''''''''''''''''''''''
+how to call controller form other controller:-
+
+this.<funcationName>
+
+  get <funcationName> () {
+    return this.application.controllers.find(controller => {
+      return controller.context.identifier === '<controller-name>'
+    })
+  }
+  
+ 
+ how to access other controller funcaiton
+ this.<funcationName>.<otherControllerFuncationName>
+ 
+ how to access other controller target
+  this.<funcationName>.<otherController<"targetName"Target>>
+ 
+ how to access other controller value
+   this.<funcationName>.<otherController<"valueName"Value>>
+
+------------------------------------------------
