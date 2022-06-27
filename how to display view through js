@@ -1,6 +1,6 @@
 Example-1 (notch-web)
 --------------------------------------------------section-1
-<!-- request will got to section to from here -->
+<!-- request will got to section 2 from here -->
 view > catalogs > _selection.html.erb :-
 
   data-controller="catalog-selection" data-action="click->catalog-selection#toggle" data-catalog-selection-tab-value="<%= params[:new_product_path].split('=').second %>"
