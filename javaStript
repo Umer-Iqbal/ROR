@@ -21,3 +21,15 @@ How to add class to element:
       //   }
       // }
     }
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+how to pass value to simple js form html
+
+pass form html:
+<span  data-value="10"> </span>
+
+get in js:
+$('span[custom]').attr('custom')    :: its result will be 10
+
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''
