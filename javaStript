@@ -29,7 +29,7 @@ pass form html:
 <span  data-value="10"> </span>
 
 get in js:
-$('span[custom]').attr('custom')    :: its result will be 10
+$('span[data-value]').attr('data-value')    :: its result will be 10
 
 
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
