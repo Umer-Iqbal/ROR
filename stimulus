@@ -46,6 +46,10 @@ controller:-
   
 ------------------------------------------------
 
+''''''''''''''''''''''''''''''''''''''''''''''''''
+<button data-action="click-><controler-name>#<funcaiton-name>">Greet</button>
+------------------------------------------------
+
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
 how to call controller form other controller:-
