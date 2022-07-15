@@ -1,0 +1,9 @@
+$.ajax({
+  type: "POST",
+  url: this.formTarget.action,
+  data: data,
+  dataType: 'json',
+  success(response) {
+    that.formTarget.reset()
+  }
+})
