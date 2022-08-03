@@ -1,0 +1,6 @@
+  window.onload = function() {
+    if (document.querySelector(".ds-flash-msg").innerHTML != '\n  \n'){
+      // document.querySelector(".ds-flash-msg").classList.remove("d-none");
+      $('.ds-flash-msg').delay(2000).removeClass('d-none')
+      $('.ds-flash-msg').delay(2000).addClass('d-none')
+    }
