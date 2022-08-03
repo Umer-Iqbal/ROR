@@ -1,0 +1,11 @@
+mysql:
+username: umer
+password: 123456
+socket: /var/run/mysqld/mysqld.sock
+
+
+how to find socket path:   mysql_config --socket
+how to login in mysql:     mysql -h localhost -u umer -p
+how to give all PRIVILEGES:  mysql> GRANT ALL PRIVILEGES ON *.* TO 'user-name'@'%';
+
+
