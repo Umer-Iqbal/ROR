@@ -1,0 +1,5 @@
+<% sorts = { "created_at asc": "Added: Old-Recent ", 'created_at desc': "Added: Recent-Old", 'title asc': "Title: A-Z", 'title desc': "Title: Z-A", 'ffe_id asc': "FFE ID: Low-High", 'ffe_id desc': "FFE ID: High-Low", 'price asc': "Price: Low-High", 'price desc': "Price: High-Low" } %>
+
+
+<%= form.select(:order, options_for_select([['Sort By', nil]] + sorts.map { |key, value| [value, key] }, params[:order]),
+                          {}, class: 'select2', style: 'width: 180px;') %>
