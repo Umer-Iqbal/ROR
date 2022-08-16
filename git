@@ -12,3 +12,41 @@ commands:
 git reset --hard <branch id>  :: how to move to old branch, previous branch git
 git checkout <file.extention>  :: how to remove file that is change and whose color is red
 git clean -f <file.extention>  :: how to remove file that is change and whose color is red
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+How to check git available remotes terminal         :: git remote -v   :output:-
+
+...
+
+copy    git@github.com:volodymyrhudyma/copy.git (fetch)
+copy    git@github.com:volodymyrhudyma/copy.git (push)
+original    git@gitlab.com:vhudyma/original.git (fetch)
+original    git@gitlab.com:vhudyma/original.git (push)
+
+How to pull or push to different remotes:-
+
+git push original master
+git push copy master
+
+
+How to add second repositories to same project ( two repositories one project):
+https://vhudyma-blog.eu/git-push-to-multiple-repositories/
+
+How to generate ssh key:
+https://gorails.com/setup/ubuntu/20.10#ruby-rvm
+
+How to add ssh key to github:
+https://www.inmotionhosting.com/support/server/ssh/how-to-add-ssh-keys-to-your-github-account/
+
+How to add ssh key to gitlab:
+https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/How-to-configure-GitLab-SSH-keys-for-secure-Git-connections#:~:text=Log%20into%20GitLab%20and%20click,keys%20under%20your%20account%20preferences.
