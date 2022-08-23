@@ -1,0 +1,20 @@
+dead center:
+
+#bigDiv {
+  border: 1px solid red;
+  height: 300px;
+  width: 300px;
+  vertical-align: middle;
+
+}
+
+#smallDiv {
+  border: 1px solid black;
+  height: 100px;
+  width: 100px;
+  margin: 0 auto;
+}
+
+<div id="bigDiv">
+  <div id="smallDiv">DD</div>
+</div>
