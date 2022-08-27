@@ -6,13 +6,22 @@ reviews = reviews.where('tags ilike any (array[?])',params[:tags_filter].split('
 Review.where('tags like any (array[?])',params[:tags_filter].split(',').map{|str| "%,#{str}%"}) if params[:tags_filter].present?  :: like operator with array, like with array
 
 here:-
-params[:cuisines_filter] == ",sdf,lkdfj,lsdjf,ewre"
-params[:cuisines_filter].split(',') == ['sdf', 'lkdfj', 'lsdjf', 'ewre']   :: it will return array
-params[:tags_filter].split(',').map{|str| "%,#{str}%"} == ["%,sdf%", "%,lkdfj%", "%,lsdjf%", "%,ewre%"]
+params[:cuisines_filter]  =>  ",sdf,lkdfj,lsdjf,ewre"
+params[:cuisines_filter].split(',')  =>  ['sdf', 'lkdfj', 'lsdjf', 'ewre']   :: it will return array
+params[:tags_filter].split(',').map{|str| "%,#{str}%"}  =>  ["%,sdf%", "%,lkdfj%", "%,lsdjf%", "%,ewre%"]
 
-search form a column with array:
+______________________________________________________________________________________________________________end(1)
+
+start(2)(array search) search form a column with array:
 
 reviews = Review.where(cuisine: params[:cuisines_filter].split(',')) if params[:cuisines_filter].present?
 
-params[:cuisines_filter] == ",sdf,lkdfj,lsdjf,ewre"
-params[:cuisines_filter].split(',') == ['sdf', 'lkdfj', 'lsdjf', 'ewre']
+params[:cuisines_filter]  =>  ",sdf,lkdfj,lsdjf,ewre"
+params[:cuisines_filter].split(',')  =>  ['sdf', 'lkdfj', 'lsdjf', 'ewre']
+
+______________________________________________________________________________________________________________end(2)
+
+start(3)map:
+a.map{|str| "tags like #{str}"}.join(' OR ')
+ => "tags like 234240 OR tags like rddrgdf" 
+______________________________________________________________________________________________________________end(3)
