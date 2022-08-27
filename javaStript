@@ -32,4 +32,15 @@ get in js:
 $('span[data-value]').attr('data-value')    :: its result will be 10
 
 
-'''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''end(2)
+
+start(3) toggleClass:
+
+$(event.currentTarget).toggleClass('clear-cuisine')    ::it will add and remove that particular class
+$(event.currentTarget).toggleClass('cuisine-select cuisine-unselect');   ::toggle between classes (two class)
+
+check which class is present:-
+var $cuisine = $(event.currentTarget).toggleClass('cuisine-select cuisine-unselect');
+    if ($cuisine.hasClass('cuisine-select')) {
+    }
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''end(3)
