@@ -1,0 +1,14 @@
+how to add column in table
+rails generate migration AddSubCategoryTitleToCategories sub_category_title: string
+
+then open the migration and make it reversable like blow
+
+def up
+  add_column :categories, :sub_category_title, :string
+end
+def down
+  remove_column :categories, :sub_category_title, :string
+end
+  
+How to create table
+rails generate model SubCategory category_id:integer name:string
