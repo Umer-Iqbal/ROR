@@ -18,3 +18,30 @@ dead center:
 <div id="bigDiv">
   <div id="smallDiv">DD</div>
 </div>
+
+
+
+
+
+
+
+
+----------------------Animations------------
+https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations#:~:text=CSS%20animations%20make%20it%20possible,well%20as%20possible%20intermediate%20waypoints.
+
+.card-load {
+    animation-duration: 1.5s;
+    animation-name: slidein;
+    animation-iteration-count: 1;
+}
+
+@keyframes slidein {
+    from {
+        margin-top: 0;
+    }
+
+    to {
+        margin-top: 35.520px;
+    }
+}
+
