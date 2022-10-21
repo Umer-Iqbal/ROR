@@ -1,0 +1,20 @@
+ <button class="map-button bg-white" data-controller="map" data-map-latitude-value="<%= @review.latitude %>" data-map-longitude-value="<%= @review.longitude %>" data-action="click->map#openMap">
+                <%= image_tag("template/map.svg") %>
+                <span> Show on map </span>
+              </button>
+
+
+...........................................................
+
+import {Controller} from "@hotwired/stimulus"
+
+export default class extends Controller {
+  static values = {
+    latitude: String,
+    longitude: String
+  }
+
+  openMap() {
+    window.open(`https://maps.google.com/?q=${this.latitudeValue},${this.longitudeValue}`, '_blank')
+  }
+}
