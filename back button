@@ -1,0 +1,9 @@
+  back() {
+    let prev_url = document.referrer;
+    if (prev_url.indexOf(window.location.origin) === -1) {
+    //if previous windo was not your site windo then this section will run
+      window.location.assign(window.location.origin)
+    } else {
+      history.go(-1)
+    }
+  }
