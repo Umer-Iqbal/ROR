@@ -3,7 +3,16 @@ js:
   $.ajax({
     type: "POST",
     url: this.formTarget.action,
+    
     data: `data=${foursquareUrl}`,
+              or
+    data: {
+        proposalNumber: that.proposalNumberTarget.value,
+        proposalOrder: that.proposalOrderTarget.value
+      }
+    
+    
+    
     dataType: 'json',
     success(response) {
       that.formTarget.reset()
