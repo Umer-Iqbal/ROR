@@ -3,7 +3,7 @@ js:
   $.ajax({
     type: "POST",
     url: this.formTarget.action,
-    data: data,
+    data: `data=${foursquareUrl}`,
     dataType: 'json',
     success(response) {
       that.formTarget.reset()
