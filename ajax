@@ -7,3 +7,15 @@ $.ajax({
     that.formTarget.reset()
   }
 })
+
+................................
+if we want to send data back form controller to ajax then we can achive this by given below code
+
+render json: [a1: "aa", a2: "bb"]
+
+.......................................
+js: 
+  we can get this response in the response in success method like given below
+  success(response) {
+      console.log(response)
+    }
