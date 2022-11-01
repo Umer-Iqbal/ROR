@@ -1,17 +1,21 @@
-$.ajax({
-  type: "POST",
-  url: this.formTarget.action,
-  data: data,
-  dataType: 'json',
-  success(response) {
-    that.formTarget.reset()
-  }
-})
+js: 
+
+  $.ajax({
+    type: "POST",
+    url: this.formTarget.action,
+    data: data,
+    dataType: 'json',
+    success(response) {
+      that.formTarget.reset()
+    }
+  })
 
 ................................
-if we want to send data back form controller to ajax then we can achive this by given below code
+rails controller:
 
-render json: [a1: "aa", a2: "bb"]
+  if we want to send data back form controller to ajax then we can achive this by given below code
+
+  render json: [a1: "aa", a2: "bb"]
 
 .......................................
 js: 
