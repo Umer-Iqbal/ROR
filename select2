@@ -1,0 +1,8 @@
+https://stackoverflow.com/questions/17957040/reset-select2-value-and-show-placeholder
+
+how to make default select2 empty
+  $(this.selectTarget).val('').select2();
+
+with select tag like blow
+<%= f.select :id, options_for_select(project.proposals.map { |c| [c.name, c.id] }), {}, id: 'proposalIds',
+                     class: 'select2 w-100', data: { 'proposal-form-target': 'select' } %>
