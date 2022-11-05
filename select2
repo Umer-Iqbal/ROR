@@ -6,3 +6,29 @@ how to make default select2 empty
 with select tag like blow
 <%= f.select :id, options_for_select(project.proposals.map { |c| [c.name, c.id] }), {}, id: 'proposalIds',
                      class: 'select2 w-100', data: { 'proposal-form-target': 'select' } %>
+                     
+                     
+ ////////////////////////////////////////////////////////////                    
+how to add event in select2
+https://psmy.medium.com/rails-6-stimulus-and-select2-de4a4d2b59e4
+
+
+<select class="element-border element-font" data-action="change->proposal-products-selection#applyFilter" data-proposal-products-selection-target="proposalOrder">
+
+  connect() {
+    this.selection = [];
+    if(this.hasProposalOrderTarget){
+      $(this.proposalOrderTarget).select2();
+
+      $(this.proposalOrderTarget).on('select2:select', function () {
+        let event = new Event('change', { bubbles: true }) // fire a native event
+        this.dispatchEvent(event);
+      });
+    }
+  }
+
+applyFilter(){
+
+}
+
+....................................................
