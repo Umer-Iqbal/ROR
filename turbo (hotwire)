@@ -27,7 +27,7 @@ method 1:-
   }
   
  method 2:- 
-   get(this.urlValue, {
+   get(`${this.urlValue}`, {
       query: {
         product_ids: this.selection,
         tab: this.tabValue
