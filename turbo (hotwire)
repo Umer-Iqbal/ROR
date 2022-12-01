@@ -1,0 +1,63 @@
+Turbo Stream:-
+
+................................................................(controller and view start)
+controller method:-
+def file_name
+end
+
+redirection view:-
+file_name.turbo_stream.erb
+
+-----------------------------------------------------------------------(controller and view end)
+
+.......................................................................(js request sent start)
+
+how to send request trubo stream request form js:
+
+turbo stream GET request:-
+method 1:-
+  async openOrders() {
+    const response = await get(`${this.ordersUrl}`, {
+      responseKind: "turbo-stream"
+    });
+    if (response.ok) {
+      document.getElementById('rightSideOrderWrapper').parentElement.classList.add('show')
+      document.getElementById('rightSideOrderWrapper').classList.remove('d-none')
+    }
+  }
+  
+ method 2:- 
+   get(this.urlValue, {
+      query: {
+        product_ids: this.selection,
+        tab: this.tabValue
+      },
+      responseKind: "turbo-stream"
+    });
+  
+turbo stream POST request:-
+
+      async add() {
+        const response = await post(`/projects/${this.projectIdValue}/floor_plans/${this.floorplanId}/spaces`, {
+            body: {
+                name: searchText
+            },
+            responseKind: "turbo-stream"
+        });
+        if (response.ok) {
+        }
+    }
+    
+-----------------------------------------------------------------------(js request sent end)    
+
+
+.......................................................................(form request sent start)
+  
+how to send request trubo stream request form rails form: 
+
+if we want to post form to GET route:-
+<%= form_with url: project_orders_orders_path, class: 'd-contents', html: { 'data-turbo-stream': 'true' }, method: :GET do |form| %>
+<% end %>
+
+
+-----------------------------------------------------------------------(form request sent end)
