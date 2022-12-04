@@ -1,0 +1,11 @@
+rails new new_app -j esbuild -c bootstrap -d postgresql -a propshaft -T
+It will create Rails project with followings.
+1) esbuild for JS
+2) css bundling with bootstrap
+3) Postgres as database
+4) Propshaft for images instead of sprockets
+5) Skip tests
+6) use bin/dev to run project
+
+after this run the following command
+rails stimulus:manifest:update
