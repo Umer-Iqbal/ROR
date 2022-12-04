@@ -1,0 +1,19 @@
+Delegate in Rails:-
+https://medium.com/@pk60905/using-delegate-in-rails-527332da7f96
+
+
+class QueueItem < ActiveRecord::Base
+  belongs_to :video
+ 
+  delegate :category, to: :video
+  def category_name
+    category.name
+  end
+end
+queue_item = QueueItem.first
+queue_item.category_name
+#=> "Action"
+
+
+
+______________________________________________________Delegate end______________________
