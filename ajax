@@ -32,3 +32,50 @@ js:
   success(response) {
       console.log(response)
     }
+    
+    
+_____________________________________________________ajax end_______________________
+
+
+
+.......................................................................(js request sent start)
+
+how to send request trubo stream request form js:
+
+turbo stream GET request:-
+method 1:-
+  async openOrders() {
+    const response = await get(`${this.ordersUrl}`, {
+      responseKind: "turbo-stream"
+    });
+    if (response.ok) {
+      document.getElementById('rightSideOrderWrapper').parentElement.classList.add('show')
+      document.getElementById('rightSideOrderWrapper').classList.remove('d-none')
+    }
+  }
+  
+ method 2:- 
+   get(`${this.urlValue}`, {
+      query: {
+        product_ids: this.selection,
+        tab: this.tabValue
+      },
+      responseKind: "turbo-stream"
+    });
+  
+turbo stream POST request:-
+
+      async add() {
+        const response = await post(`/projects/${this.projectIdValue}/floor_plans/${this.floorplanId}/spaces`, {
+            body: {
+                name: searchText
+            },
+            responseKind: "turbo-stream"
+        });
+        if (response.ok) {
+        }
+    }
+    
+-----------------------------------------------------------------------(js request sent end)    
+
+__________________________________________________________Js request sent end_____________________________
