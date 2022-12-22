@@ -1,0 +1,11 @@
+  dateFormat() {
+    this.orderDateTargets.forEach(function (orderDate) {
+      let date = orderDate.value.split('/')
+      if (date.length > 1) {
+        orderDate.value = `${date[2]}-${date[0]}-${date[1]}`
+      }
+      $(orderDate).on('blur', function (event) {
+        event.currentTarget.type = 'text'
+      })
+    })
+  }
