@@ -79,3 +79,32 @@ turbo stream POST request:-
 -----------------------------------------------------------------------(js request sent end)    
 
 __________________________________________________________Js request sent end_____________________________
+
+
+
+
+how to render view of js request (check format)
+(just give the path like vendors_path to refresh the windo in the current screen)
+
+
+  def create
+    @vendor = if current_user.admin?
+      Vendor
+    else
+      current_company.vendors
+    end.new(vendor_params)
+    authorize @vendor
+    if @vendor.save
+    
+    
+      flash[:success] = 'Vendor created Successfully'
+      respond_to do |format|
+        format.js { render js: "window.location = '#{vendors_path}'" }
+      end
+      
+      
+    else
+      @vendor_save = false
+      render :new
+    end
+  end
