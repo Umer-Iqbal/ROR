@@ -82,6 +82,9 @@ __________________________________________________________Js request sent end___
 
 
 
+the below method can be used using ajax request also with remote true like
+
+<%= form_with model: vendor, html: { data: { remote: true } }  do |f| %>
 
 how to render view of js request (check format)
 (just give the path like vendors_path to refresh the windo in the current screen)
