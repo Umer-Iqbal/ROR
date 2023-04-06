@@ -48,6 +48,25 @@ turbo stream POST request:-
         }
     }
     
+    
+ 
+ 
+ method 3:-
+ submit as a url request
+  async sendRequestAsTurbo(that, products) {
+    const method = that.methodValue || 'get';
+    const url = `${this.urlValue}?product_ids=${products}`;
+    const response = await $.ajax({
+      type: method,
+      url: url,
+      headers: {
+        'Accept': 'text/vnd.turbo-stream.html'
+      }
+    });
+    // Do something with the response
+  }
+    
+    
 -----------------------------------------------------------------------(js request sent end)    
 
 
