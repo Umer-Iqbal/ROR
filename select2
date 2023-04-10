@@ -32,3 +32,13 @@ applyFilter(){
 }
 
 ....................................................
+
+how to remove the search field form seletc to?
+
+add below line in select tag that is going to become select2
+
+"data-minimum-results-for-search":"Infinity"
+
+like below
+    <%= select_tag(:floor_plan_id, options_for_select(@items), id:@target_name, class:"select2", required: true, "data-minimum-results-for-search":"Infinity",
+                   data: { placeholder: @place_holder, action: "change->dropdown-select-action-component##{@action_name}", "dropdown-select-action-component-target": @target_name }) %>
