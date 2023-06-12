@@ -80,3 +80,27 @@ if we want to post form to GET route:-
 
 
 -----------------------------------------------------------------------(form request sent end)
+
+
+
+
+
+
+
+
+
+
+broadcasting with multiple streams form controller:
+
+if @marker.save
+      @product.update(quantity: @product.markers.size) if @product.quantity < @product.markers.size
+      render turbo_stream: [
+        turbo_stream.update_all(".product_#{@product.id}_quantity", "x #{@product.quantity}"),
+        turbo_stream.replace('floorplan_products_wrapper', partial: 'products/list_in_tab',
+                                                           locals: { floor_plan: @product.floor_plan, products: @product.floor_plan.products, product_ids: @product.floor_plan.products.pluck(:id) }),
+      ]
+
+      Turbo::StreamsChannel.broadcast_update_to("product_detail_list", target: "product_detail", partial: "products/product_detail_list",
+                                                locals: {product: @product, current_user: current_user})
+                                                
+ end
