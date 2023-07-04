@@ -1,0 +1,28 @@
+when we create duplicate of a product then it image will not duplicate using (gem 'deep_cloneable')
+here is the method how we can duplicate the product using above gem
+we will call the duplicate instance method in a job
+
+class Product < ApplicationRecord
+  has_attached_file :image, preserve_files: true, styles: { thumb: '500x500>' },
+                    default_url: :default_workof_image_path
+
+  def duplicate
+    kopy = deep_clone
+  end
+end
+
+above method will not duplicate the attachments we need to do this manually like below
+
+  def duplicate
+    kopy = deep_clone
+
+    # Copy the attachment
+    kopy.image = image
+
+    kopy
+  end
+
+in this method we first create the shallow copy of the product and then assign the image of current object (product)
+to the shallow copy object and then return it where it will save in this way we can also create copy of attachements too
+
+if there are othere attachement we also need to assign them manually to
