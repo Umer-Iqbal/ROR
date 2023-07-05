@@ -104,3 +104,44 @@ if @marker.save
                                                 locals: {product: @product, current_user: current_user})
                                                 
  end
+
+
+
+
+
+--------------------------------------------------------------------------turbo stream update with view component---------------------------------------------------
+_planning.html.erb
+
+     <% filters = { "floor_plan": floor_plans_options(@project.floor_plans.order(:title)),
+                     "category": product_categories_options, "sub_category": product_sub_categories_options, "status": order_statuses_options, "vendor": vendor_options_by_project(@project.id),
+                     "space": floor_plans_spaces_options(@project)} %>
+
+      <%= form_with(method: :GET, local: true, id: :orders_filter_form) do |form| %>
+        <span id="planning_budgeting_filter">
+          <%= render (Filter::FilterComponent.new(filters: filters)) %>
+        </span>
+        <%= hidden_field_tag "query", params[:query] %>
+      <% end %>
+
+
+
+
+floor_plan_spaces_controller.rb
+def create
+  if @floor_plan_space.save
+        turbo_stream_updates = []
+        flash.now[:success] = @floor_plan_space.name + ' space was successfully created.'
+        turbo_stream_updates << turbo_stream.update('flash', partial: 'shared/flash_messages')
+  
+        filters = { "floor_plan": floor_plans_options(@project.floor_plans.order(:title)),
+                    "category": product_categories_options, "sub_category": product_sub_categories_options, "status": order_statuses_options, "vendor": vendor_options_by_project(@project.id),
+                    "space": floor_plans_spaces_options(@project)}
+  
+        turbo_stream_updates << turbo_stream.update("planning_budgeting_filter", html: ApplicationController.render(Filter::FilterComponent.new(filters: filters), layout: false))
+  
+        render turbo_stream: turbo_stream_updates
+  end
+end
+
+---------------------------------------------------------------------end----------------------------------------------------------------------------------------------------------
+
