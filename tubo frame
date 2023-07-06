@@ -1,0 +1,48 @@
+application.html.erb
+<%= turbo_frame_tag "component_modal" %>
+
+
+
+some random view _planning.html.erb
+<%= polaris_button(
+            url: create_space_modal_project_floor_plan_spaces_path(project_id: project),
+            primary: true,
+            data: { "turbo-frame": "component_modal"}
+            ) { "click" } %>
+
+
+after this request go to controller action as an html (get type) request
+
+ def create_space_modal
+    @bulk_floor_plans = @project.floor_plans
+end
+
+
+create_space_modal.html.erb
+
+
+
+<%= turbo_frame_tag "component_modal" do %>
+  <div class="component-modal-wrapper">
+    <div data-modal-target="modal" class="modal w-modal data-turbo-modal fade" tabindex="-1" role="dialog" data-controller="modal" data-action="keyup@document->modal#handleKeyup">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="component-modal-header">
+            <span class="modal-title">New Space</span>
+            <button type="button" class="close close-modal" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true"><%= image_tag "icons/cross.svg" %></span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <div data-controller="dropdown-select-action-component" data-dropdown-select-action-component-target="selectWrapper" data-dropdown-select-action-component-project-id-value=<%= params[:project_id] %>>
+                <%= render(DropdownSelectAction::DropdownSelectActionComponent.new(name: "floor_plan_id", title: "Floorplan", items: @bulk_floor_plans, place_holder: 'Select Floorplan', action_name: "changeFloorplan", target_name: 'floorplanSelect', required: true)) %>
+                <%= render(DropdownSelectAction::DropdownSelectActionComponent.new(name: "floor_plan_space_id", title: "Space Name", place_holder: 'Select Floorplan', target_name: 'spaceSelect')) %>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+in above case screen will not replace and data will show on same screen in the modal
