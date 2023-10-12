@@ -1,0 +1,4 @@
+how to send turbo stream rquest to get method or route using link_to or anchor tag
+data-turbo-stream=true
+<a data-turbo-stream="true" data-controller="polaris-button" href="/users/add_friend?friend_user_id=2" > Add Friend </a>
+<%= link_to 'Change my password', edit_password_url(@resource, reset_password_token: @token),  data: { "turbo-stream": true } %>
