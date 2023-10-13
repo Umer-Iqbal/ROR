@@ -1,0 +1,84 @@
+in model:
+
+class OtherCost < ApplicationRecord
+  belongs_to :product
+end
+
+class Product < ApplicationRecord
+
+  has_many :other_costs, dependent: :destroy   
+  accepts_nested_attributes_for :other_costs, reject_if: proc { |m| m['name'].blank? || m['value'].blank? }, allow_destroy: true
+end
+
+"has_many :other_costs, dependent: :destroy": 
+This line establishes a one-to-many association between the Product model and the OtherCost model. This means that a product can have 
+multiple other costs associated with it. The dependent: :destroy option means that if a product is deleted, all of its associated other 
+costs will also be deleted.
+
+"accepts_nested_attributes_for :other_costs, reject_if: proc { |m| m['name'].blank? || m['value'].blank? }, allow_destroy": true: 
+This line enables nested attributes for the other_costs association, allowing you to create and update OtherCost records within the same 
+form as the Product. Here's a breakdown of the options:
+:other_costs: 
+This specifies the association for which you want to accept nested attributes.
+
+reject_if: proc { |m| m['name'].blank? || m['value'].blank? }: 
+This option defines a Proc (a block of code) that determines whether to reject nested attributes when saving a product. In this case, it 
+checks if both the 'name' and 'value' fields are blank. If they are, the nested attributes will be rejected.
+
+allow_destroy: true: This option allows the deletion of associated OtherCost records when editing the Product form. If you mark a nested 
+OtherCost for destruction in the form, it will be destroyed when you save the Product.
+
+
+
+In controller:
+params.require(:product).permit(:title, :ffe_id, :image, other_costs_attributes: %i[id name value _destroy])
+
+_destroy: 
+This is used to mark associated OtherCost records for destruction when you want to delete them as part of the Product form. without this other 
+cost will not be removed form product its related to cocoon
+
+
+In View:
+
+ <div class="basic-field-wrapper">
+    <%= form.fields_for :other_costs do |other_cost| %>
+      <%= render 'products/other_costs_fields', f: other_cost %>
+    <% end %>
+
+#above block is used to display previously added other_cost to the product
+
+    <div class="">
+      <label class="more-cost-color mt-2">+</label>
+      <%= link_to_add_association 'Add more costs', form, :other_costs, class: 'more-cost-color',
+                                  partial: 'products/other_costs_fields' %>
+    </div>
+
+#this is used to add new other cost to the product form. new partial: 'products/other_costs_fields' will automatically added when we click the above link
+  </div>
+
+
+Partial:
+
+_other_costs_fields.html.erb
+
+<div class="nested-fields">
+
+  <div class="d-flex justify-content-between mt-2 position-relative">
+    <span class="half-field-wrapper">
+      <span class="px-1">Cost Name</span>
+      <%= f.text_field :name, class: 'input-field', placeholder: 'Cost Name' %>
+    </span>
+    <span class="half-field-wrapper">
+      <span class="px-1">Fee</span>
+      <%= render(NumberInputComponent.new(form: f, field: :value, placeholder: "Fee")) %>
+    </span>
+    <%= link_to_remove_association 'X', f, class: 'doc-remove' %>
+  </div>
+</div>
+
+Explanation:
+
+<div class="nested-fields">:
+nested-fields class dive should be at the top other wise remove funcationality will not properly work means when we click on remove association link 
+this partial will not automatically remove from the form or screen it also related to cocoon
+
