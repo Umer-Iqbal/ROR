@@ -1,0 +1,22 @@
+how to update svg border color
+ svg {
+      path {
+        stroke: red;
+      }
+     }
+
+how to update svg body color
+
+svg {
+      path {
+        fill: red;
+      }
+     }
+
+how to update both body and border of svg
+svg {
+      path {
+        stroke: red;
+        fill: red;
+      }
+     }
