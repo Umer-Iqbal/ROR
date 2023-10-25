@@ -1,0 +1,15 @@
+how we delete documents or images form s3 in rails controller
+
+just make the image or attachement nil
+
+if params[:floor_plan][:delete_image] == "true"
+      @floor_plan.update(image: nil)
+end
+
+ def delete_document
+    @product = Product.find(params[:product_id])
+    @document = @product.documents.find(params[:document_id])
+
+    # Mark the document as deleted by setting the attachment to an empty string
+    @document.attachment = nil
+end
