@@ -1,0 +1,57 @@
+How to pass values to serializers
+Method 1:
+--------
+In controller:
+
+def show
+   render json: @patient, serializer: PatientDetailSerializer, time_zone: params[:time_zone]  #params[:time_zone] = "Asia/Karachi"
+end
+
+In Serializer:
+class PatientDetailSerializer < UserSerializer
+  attributes :name, :middle_name,:last_name,:ears,:gender, :tinnitus_type,:ears, :tinnitus_start_date,
+             :phone_number, :dob, :country, :city, :state, :address1, :postal_code, :current_frequency
+  has_many :sessions, serializer: SessionSerializer do
+    object.sessions.order(created_at: :desc)
+  end
+
+  def initialize(object, scope = {})
+    debugger
+    @time_zone = scope[:time_zone]
+    super
+  end
+end
+
+Output:
+[4, 13] in /home/brainx/work_project/tinnitus-backend/app/serializers/patient_detail_serializer.rb
+    4:   has_many :sessions, serializer: SessionSerializer do
+    5:     object.sessions.order(created_at: :desc)
+    6:   end
+    7: 
+    8:   def initialize(object, scope = {})
+    9:     debugger
+=> 10:     @time_zone = scope[:time_zone]
+   11:     super
+   12:   end
+   13: end
+(byebug) scope
+{:time_zone=>"Asia/Karachi", :namespace=>Api::V1::ClinicApis, :scope=>nil, :scope_name=>:view_context}
+
+
+Method 2:
+---------
+
+def index
+  credit_price =  current_user.applicable_credit_price
+  render json: Package.with_attached_thumbnail.where(status: true).order(credits: :asc), credit_price: credit_price
+end
+
+we can get credit_price using instance_options
+
+class PackageSerializer < ActiveModel::Serializer
+  attributes :id, :name, :price, :credits, :free_credits, :status, :thumbnail_url
+
+  def price
+    object.credits * (instance_options[:credit_price].present? ? instance_options[:credit_price] : Setting.first.credit_price)
+  end
+end
