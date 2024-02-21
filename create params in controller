@@ -1,3 +1,13 @@
+-----------------------------------------------------------1------------------------------
+def accept
+  clinic = Clinic.new(clinic_params)
+  if clinic.save
+    @clinic_request.update(status: "accepted")
+    render_message("Clinic created successfully")
+  else
+    render_error(422, clinic.errors.full_messages.join(', '))
+  end
+end
 
 def clinic_params
   #here we are creating params
@@ -8,4 +18,25 @@ def clinic_params
   #here we are permitting the created params
   params.permit(:name, :email, :phone_number, :address1, :country, :city, :state, :postal_code,
                 contact_person_info: [:name, :phone_number], clinic_notes_attributes: [:id, :note, :_type])
+end
+
+
+--------------------------------------------------------------2-----------------------------
+
+def accept
+  clinic = Clinic.new(clinic_attributes)
+  if clinic.save
+    @clinic_request.update(status: "accepted")
+    render_message("Clinic created successfully")
+  else
+    render_error(422, clinic.errors.full_messages.join(', '))
+  end
+end
+
+
+def clinic_attributes
+  attributes = @clinic_request.attributes.slice("name", "email", "phone_number", "address1", "country", "city", "state",
+                                                "postal_code", "contact_person_info")
+  attributes.merge!(clinic_notes_attributes: [{ note: @clinic_request.note, _type: 'clinic' }]) if @clinic_request.note.present?
+  attributes
 end
