@@ -1,0 +1,11 @@
+
+def clinic_params
+  #here we are creating params
+  #clinic_request is a table
+  params.merge!(clinic_notes_attributes: [{ note: @clinic_request.note, _type: 'clinic' }]) if @clinic_request.note.present?  #this is for accept nested attributes because it take array
+  params.merge!(@clinic_request.attributes) #it will return all the attributes of clinic_request in the from of key value pair or dectionary
+
+  #here we are permitting the created params
+  params.permit(:name, :email, :phone_number, :address1, :country, :city, :state, :postal_code,
+                contact_person_info: [:name, :phone_number], clinic_notes_attributes: [:id, :note, :_type])
+end
