@@ -1,0 +1,34 @@
+//how to add custome background image in select2 dropdown
+.select2-container {
+  width: 180px !important;
+
+  .select2-selection {
+    height: 40px;
+    padding-top: 5px;
+
+    .select2-selection__arrow {
+
+      background: url("dropdown-vector.svg") no-repeat;
+      background-size: 65% 65%;
+      display: block;
+      top: 11px !important;
+      right: -2px !important;
+      position: absolute !important;
+      pointer-events: none;
+      b {
+        border: none;
+
+      }
+    }
+  }
+}
+
+.select2-container--open {
+  .select2-selection {
+    .select2-selection__arrow {
+      top: 4px !important;
+      right: 4px !important;
+      rotate: 180deg;
+    }
+  }
+}
