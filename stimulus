@@ -31,7 +31,8 @@ data-<controller-name>-<valueName>-value="<%= export_orders_path %>"
 
 controller:-
   static values = {
-    valueName: String
+    valueName: String,
+    valueNmae: Number,
   }
   
   let data = this.valueNameValue
