@@ -1,0 +1,30 @@
+<%= form_for organization, url: url do |f| %>
+    <input type="hidden" name="organization[directory_ids][]" value="3">
+    <input type="hidden" name="organization[directory_ids][]" value="4">
+    <div class="mt-4">
+      <%= link_to "Cancel", super_admin_organizations_path %>
+      <%= f.submit "Save Changes" %>
+    </div>
+<% end %>
+
+here is how array will receive: "directory_ids"=>["3", "9"]
+
+Parameters: {"authenticity_token"=>"[FILTERED]", "organization"=>{"name"=>"first org", "state"=>"punjab", "country"=>"pakistan", "directory_ids"=>["3", "9"], "longitude"=>"-111.82", "latitude"=>"34.87"}, "commit"=>"Save Changes", "id"=>"1"}
+
+
+---------------------
+
+
+<%= form_for organization, url: url do |f| %>
+    <input type="hidden" name="organization[]" value="3">
+    <input type="hidden" name="organization[]" value="4">
+    <div class="mt-4">
+      <%= link_to "Cancel", super_admin_organizations_path %>
+      <%= f.submit "Save Changes" %>
+    </div>
+<% end %>
+
+in this case here is how organization array will receive
+here is how array will receive: "organization"=>["3", "9"]
+
+Parameters: {"authenticity_token"=>"[FILTERED]", {"name"=>"first org", "state"=>"punjab", "country"=>"pakistan", "organization"=>["3", "9"], "longitude"=>"-111.82", "latitude"=>"34.87"}, "commit"=>"Save Changes", "id"=>"1"}
