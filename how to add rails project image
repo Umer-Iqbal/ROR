@@ -1,1 +1,16 @@
 https://josephcardillo.medium.com/how-to-add-a-favicon-to-your-rails-app-9676336f7006
+
+<head>
+  <title>Batfone</title>
+  <link rel="icon" href="<%= image_path('logo.svg') %>">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="turbo-prefetch" content="false">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+</head>
+
+add this line with your image
+ <link rel="icon" href="<%= image_path('logo.svg') %>">
