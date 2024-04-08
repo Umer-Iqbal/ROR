@@ -1,0 +1,23 @@
+<div class="org-form-wrapper" data-controller="organization-form" data-organization-form-cross-img-value="<%=asset_path('cross.svg') %>">   <------------ here is how to give referance to asset images
+</div>
+
+import { Controller } from "@hotwired/stimulus"
+
+// Connects to data-controller="organization-form"
+export default class extends Controller {
+
+  static values = {
+    crossImg: String    <--------------------here is how to get value to add it to element
+  }
+
+  addDirectory(){
+    event.currentTarget.classList.add('d-none')
+    let element = ` <div class="dir-container">
+            <span>${event.currentTarget.innerHTML}</span>
+            <img src=${this.crossImgValue} %>        <-------------------here we are adding image that we are importing through value
+          </div>`
+
+    this.dirsContainerTarget.insertAdjacentHTML('beforeend', element)
+  }
+
+}
