@@ -11,6 +11,18 @@ here is how array will receive: "directory_ids"=>["3", "9"]
 
 Parameters: {"authenticity_token"=>"[FILTERED]", "organization"=>{"name"=>"first org", "state"=>"punjab", "country"=>"pakistan", "directory_ids"=>["3", "9"], "longitude"=>"-111.82", "latitude"=>"34.87"}, "commit"=>"Save Changes", "id"=>"1"}
 
+here is how to handel in params
+directory_ids: []
+
+  def organization_params
+      params.require(:organization).permit(:status, :name, :state, :country, :longitude, :latitude, directory_ids: [])
+    end
+
+or
+
+def organization_params
+      params.permit(:status, :name, :state, :country, :longitude, :latitude, directory_ids: [])
+    end
 
 ---------------------
 
