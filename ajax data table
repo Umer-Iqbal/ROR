@@ -1,0 +1,51 @@
+pagination issue resolved in case of left_join
+
+  def view_columns
+    @view_columns ||= {
+      name: { source: "Organization.name", cond: :like, orderable: false },
+      country: { source: "Organization.country", searchable: false, orderable: false },
+      state: { source: "Organization.state", searchable: false, orderable: false },
+      directories: { source: "Organization.name", searchable: false, orderable: false },
+      users_count: { source: "User.count", searchable: false },
+      status: { source: "Organization.status", searchable: false, orderable: false },
+      edit_organization: { source: "", searchable: false, orderable: false },
+    }
+  end
+
+  def data
+    records.map do |record|
+      {
+        name: record.name,
+        country: record.country,
+        state: record.state,
+        directories: directories(record),
+        users_count: record.user_count,
+        status: status_btn(record),
+        edit_organization: edit_link(record),
+      }
+    end
+  end
+
+  def get_raw_records
+    organizations = Organization.includes(:directories).left_joins(:users).select("organizations.*, count(users.id) as user_count").group('organizations.id').all
+
+    filter(organizations)
+  end
+
+  def filter(organizations)
+    if organizations.class != Integer
+      organizations = organizations.ransack(name_cont: params[:search][:value]).result if params[:search][:value].present?
+      organizations = organizations.ransack(country_cont: params[:country]).result if params[:country].present?
+      organizations = organizations.ransack(state_cont: params[:state]).result if params[:state].present?
+      organizations = organizations.where(status: params[:status] == "true" ? true : false) if params[:status].present?
+    end
+    organizations
+  end
+
+  def records_total_count
+    filter(Organization.includes(:directories).count(:all))
+  end
+
+  def records_filtered_count
+    filter_records(filter(Organization.includes(:directories))).count(:all)
+  end
