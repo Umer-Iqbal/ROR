@@ -1,0 +1,6 @@
+ngrok configuration
+add authentic token in terminal that is given in your ngrok web dashboard
+ngrok http 3000
+then add in
+config/environments/development.rb
+  config.hosts << "ad61-116-58-41-130.ngrok-free.app"
