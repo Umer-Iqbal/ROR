@@ -1,0 +1,42 @@
+many to  many with aditional  table or (has many through)
+
+--------------------------------------------------
+how to generate middel table
+
+rails generate model UserOrganization user:references organization:references
+
+brainx@brainx-hp:~/work_project/batfone$ rails generate model UserOrganization user:references organization:references
+      invoke  active_record
+      create    db/migrate/20240417051133_create_user_organizations.rb
+      create    app/models/user_organization.rb
+
+here is how migration will look like
+
+class CreateUserOrganizations < ActiveRecord::Migration[7.0]
+  def change
+    create_table :user_organizations do |t|
+      t.references :user, null: false, foreign_key: true
+      t.references :organization, null: false, foreign_key: true
+
+      t.timestamps
+    end
+  end
+end
+
+-------------------------------------------------------
+how models will look like
+
+class User < ApplicationRecor
+  has_many :user_organizations
+  has_many :organizations, through: :user_organizations
+end
+
+class UserOrganization < ApplicationRecord
+  belongs_to :user
+  belongs_to :organization
+end
+
+class Organization < ApplicationRecord
+  has_many :user_organizations
+  has_many :users, through: :user_organizations
+end
