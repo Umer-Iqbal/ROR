@@ -18,3 +18,23 @@ to your package.json
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",
     "build:css": "sass ./app/assets/stylesheets/application.bootstrap.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules"
   }
+
+
+
+-----------------------------
+
+if it show error like this
+brainx@brainx-hp:~/work/umer_repos/site$ bin/dev
+/usr/share/rvm/gems/ruby-3.2.2/bin/foreman: 6: exec: /usr/share/rvm/gems/ruby-3.2.2/bin/ruby: not found
+
+solution:
+
+add forman gem using the below command
+
+gem install foreman
+bundle install
+
+after that try again using the same command bin/dev server will start
+
+if you just want to run js/css then comment the in Procfile.dev file 
+# web: env RUBY_DEBUG_OPEN=true bin/rails server
