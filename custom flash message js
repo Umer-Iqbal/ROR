@@ -1,0 +1,74 @@
+in application.html.erb---------------------
+
+<div id="customFlashMsg" class="flash-message-wrapper align-items-start d-flex flex-column"></div>
+
+in custom.js-------------------------
+
+window.setFlashMessage = (msg) => {
+  let id = 0;
+
+  if (document.getElementById("customFlashMsg").lastChild != null) {
+    id = parseInt(document.getElementById("customFlashMsg").lastChild.dataset.flashCount) + 1;
+  }
+  const flashMessageWrapper = document.createElement('div');
+  flashMessageWrapper.innerHTML = `<div class="d-flex" data-controller="flash-message" id="customId${id}" data-flash-count="${id}">
+    <div class="status alert-info">
+    </div>
+    <div class="msg-wrapper">
+      ${msg}
+    </div>
+  </div>`;
+
+  setTimeout(() => {
+    const flashMessage = document.getElementById(`customId${id}`);
+    if (flashMessage) {
+      flashMessage.remove();
+    }
+  }, 3000);
+
+  document.getElementById('customFlashMsg').appendChild(flashMessageWrapper.firstChild);
+}
+
+
+and in style-----------------------------------
+
+.flash-message-wrapper {
+  position: absolute;
+  z-index: 1;
+  left: 39%;
+  top: 10%;
+  z-index: 10051;
+
+  min-height: 52px;
+  background: white;
+  display: flex;
+  align-items: center;
+  padding: 16px 30px;
+  border-radius: 30px;
+
+  .msg-wrapper {
+    max-width: 260px;
+  }
+
+  .status {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+  }
+
+  .alert-success {
+    background-color: $primary-green;
+  }
+
+  .alert-danger {
+    background-color: $primary-red;
+  }
+
+  .alert-info {
+    background-color: $primary-orange;
+  }
+}
