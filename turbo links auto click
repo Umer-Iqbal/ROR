@@ -1,0 +1,18 @@
+https://stackoverflow.com/questions/78042975/rails-with-hotwire-turbo-doing-get-requests-on-link-hover
+
+
+It's a new instaclick behavior in Turbo v8:
+https://github.com/hotwired/turbo/pull/1101
+
+You can disable it by adding a meta tag to your page:
+
+<meta name="turbo-prefetch" content="false">
+or data attribute to/around your links:
+
+<a href="/" data-turbo-prefetch="false">Home</a>
+
+<div data-turbo-prefetch="false">
+  <a href="/">Home</a>
+  ...
+</div>
+https://turbo.hotwired.dev/handbook/drive#prefetching-links-on-hover
