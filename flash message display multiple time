@@ -1,0 +1,6 @@
+after_action :clear_flash, only: :index
+
+private
+  def clear_flash
+    flash.clear
+  end
