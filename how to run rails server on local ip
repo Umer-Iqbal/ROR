@@ -1,0 +1,32 @@
+run below command in ubuntu to get your local ip
+
+ifconfig
+or
+ip a
+
+Look for the IP address associated with your network adapter (e.g., eth0, wlan0). It will be something like 192.168.x.x.
+
+after that start your rails server like this
+
+rails server -b 192.168.x.x
+
+here is how your server will start
+
+brainx@brainx-hp:~/work_project/batfone$ rails s -b 192.168.1.86
+=> Booting Puma
+=> Rails 7.0.8.1 application starting in development 
+=> Run `bin/rails server --help` for more startup options
+Puma starting in single mode...
+* Puma version: 5.6.8 (ruby 3.2.2-p53) ("Birdie's Version")
+*  Min threads: 5
+*  Max threads: 5
+*  Environment: development
+*          PID: 319587
+* Listening on http://192.168.1.86:3000
+Use Ctrl-C to stop
+Started GET "/" for 192.168.1.86 at 2024-06-13 12:50:22 +0500
+
+
+
+this is the url you can share with other peoples
+http://192.168.1.86:3000
