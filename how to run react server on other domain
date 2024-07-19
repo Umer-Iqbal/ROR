@@ -1,0 +1,7 @@
+run below command to start the server
+
+HOST=admin.localhost && npm start
+
+server will start on the below url
+
+http://admin.localhost:3000/
