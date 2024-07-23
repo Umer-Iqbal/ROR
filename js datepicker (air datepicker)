@@ -1,0 +1,29 @@
+https://air-datepicker.com/docs
+
+how to install
+
+yarn add air-datepicker
+
+import its css file in application.bootstrap.scss
+
+@import "air-datepicker/air-datepicker";
+
+
+add stimulus controller
+import { Controller } from "@hotwired/stimulus"
+import AirDatepicker from 'air-datepicker';
+import localeEn from 'air-datepicker/locale/en';
+
+// Connects to data-controller="datepicker"
+export default class extends Controller {
+  static targets = ['dateField', 'phoneField']
+  connect() {
+    new AirDatepicker(this.element,
+      {locale: localeEn,
+        dateFormat: "yyyy-MM-dd"
+      })
+  }
+}
+
+add on the input file like this
+<%= form.date_field :departure_date, "data-controller": "datepicker" %>
