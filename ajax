@@ -111,3 +111,27 @@ how to render view of js request (check format)
       render :new
     end
   end
+
+__________________________________________________________How to receive data back from rails controller in json form_____________________________
+
+js action: 
+
+  async openPdf(){
+    const response = await fetch(`/admin_actions/create_unsigned_pdf?form_id=${this.formIdValue}`, {
+      method: 'GET',
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
+    });
+
+    if (response.ok) {
+      const data = await response.json()
+      debugger
+    }
+  }
+
+
+rails controller action:
+  def create_unsigned_pdf
+    render json: { message: "I am back" }
+  end
