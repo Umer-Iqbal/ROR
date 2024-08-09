@@ -1,0 +1,10 @@
+class User < ApplicationRecord
+  has_one_attached :thumbnail
+
+  validates :name, :credits, presence: true
+  validates :thumbnail, content_type: { in: %w[image/png image/jpg image/jpeg image/webp], message: 'has not a valid image type' }
+
+  def thumbnail_url
+    Rails.application.routes.url_helpers.rails_blob_url(self.thumbnail) if self.thumbnail.attached?
+  end
+end
