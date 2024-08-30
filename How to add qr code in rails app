@@ -1,0 +1,38 @@
+add this gem to generate qr_code
+
+gem "rqrcode", "~> 2.0"
+
+
+-------------------
+how to generate
+--------------------  
+def generate_qrcode
+    original_url = "#{request.headers['HTTP_REFERER'].split('?short-code=')[0]}"
+
+    short_url_obj = ShortenUrl.find_or_initialize_by(user_id: current_user.id)
+    short_url_obj.update(original_url: original_url)
+
+    qr_code = RQRCode::QRCode.new(Rails.application.routes.url_helpers.shorten_url_decryption_url(id: short_url_obj.short_code))
+    qr_code_image = qr_code.as_png(
+      border_modules: 1,
+      color_mode: ChunkyPNG::COLOR_GRAYSCALE,
+      file: nil,
+      fill: 'white',
+      module_px_size: 6,
+      resize_exactly_to: false,
+      resize_gte_to: false,
+      size: 200
+    )
+    IO.binwrite('/tmp/continue-mobile-qrcode.png', qr_code_image.to_s)
+
+    render turbo_stream: turbo_stream.update('generalModal', partial: "application_forms/qrcode_modal",
+                                             locals: { qrcode_img_url: qr_code_image.to_data_url })
+  end
+
+
+-------------------
+how to display
+--------------------
+application_forms/_qrcode_modal.html.erb
+
+ <%= image_tag(qrcode_img_url) %>
