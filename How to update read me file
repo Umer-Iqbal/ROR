@@ -1,0 +1,9 @@
+Here is the detail and demo repo that you can follow for creating and updating Readme file of all your projects. Please make sure you follow this standard when you start a new project and update your existing readme file
+We should have readme file in each project covering following aspects.
+Intro of the project.
+Dependencies (Framework versions etc) (Technologies used.) (External apis used)
+How to setup project.
+How to deploy.
+Can add Key features (Just headings, no need to write feature details.)
+Here is the sample for MERN, Which can be used for other web teams too.
+https://github.com/panshak/accountill/blob/master/README.md
