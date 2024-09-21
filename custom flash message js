@@ -89,3 +89,18 @@ flash message in center with fixed position-----------------------------------
   border-radius: 30px;
   transform: translateX(-50%);
 }
+
+..............................................................................................
+
+hit this funcation multiple time this funcatipn to display flash message it reduce display time every time?
+
+solution
+  displayMessage(){
+    if (this.timeoutId) clearTimeout(this.timeoutId);
+    this.element.classList.remove('d-none')
+    this.timeoutId = setTimeout(() => {
+      this.element.innerHTML = ""
+      this.element.classList.add('d-none')
+      this.timeoutId = null;
+    }, 3000);
+  }
