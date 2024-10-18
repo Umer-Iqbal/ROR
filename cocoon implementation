@@ -82,6 +82,19 @@ Explanation:
 nested-fields class dive should be at the top other wise remove funcationality will not properly work means when we click on remove association link 
 this partial will not automatically remove from the form or screen it also related to cocoon
 
+here is how its migration look like
+
+class CreateOtherCosts < ActiveRecord::Migration[6.1]
+  def change
+    create_table :other_costs do |t|
+      t.string :name
+      t.float :value
+      t.references :product, foreign_key: true
+
+      t.timestamps
+    end
+  end
+end
 
 
 -------------------
