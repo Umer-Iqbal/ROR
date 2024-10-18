@@ -82,3 +82,14 @@ Explanation:
 nested-fields class dive should be at the top other wise remove funcationality will not properly work means when we click on remove association link 
 this partial will not automatically remove from the form or screen it also related to cocoon
 
+
+
+-------------------
+installation method
+gem "cocoon"
+then run bundle install
+yarn add @nathanvda/cocoon 
+
+after that add below line in application.js
+import "@nathanvda/cocoon"
+
